@@ -1,380 +1,279 @@
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <title>AutoStyle AI</title>
-
-  <script src="https://telegram.org/js/telegram-web-app.js"></script>
-
-  <style>
-    :root {
-      --bg: #f5f7fa;
-      --card: #ffffff;
-      --text: #182230;
-      --muted: #7c8798;
-      --accent: #2563eb;
-      --border: #e8edf3;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      padding: 0 0 28px;
-      background: var(--bg);
-      color: var(--text);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
-                   Roboto, Arial, sans-serif;
-    }
-
-    .app {
-      max-width: 520px;
-      margin: 0 auto;
-      padding: 22px 18px;
-    }
-
-    .topbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 26px;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 19px;
-      font-weight: 800;
-      letter-spacing: -0.6px;
-    }
-
-    .logo {
-      display: grid;
-      place-items: center;
-      width: 42px;
-      height: 42px;
-      border-radius: 14px;
-      background: #e7efff;
-      font-size: 23px;
-    }
-
-    .tag {
-      padding: 7px 10px;
-      border-radius: 20px;
-      background: #e7f8ee;
-      color: #16834a;
-      font-size: 11px;
-      font-weight: 700;
-    }
-
-    .hero {
-      padding: 24px 21px;
-      border-radius: 25px;
-      background: linear-gradient(145deg, #e8f0ff, #f8fbff);
-      border: 1px solid #e0eaff;
-      margin-bottom: 25px;
-    }
-
-    .eyebrow {
-      color: var(--accent);
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: 1.4px;
-      text-transform: uppercase;
-    }
-
-    h1 {
-      font-size: 31px;
-      line-height: 1.12;
-      letter-spacing: -1.1px;
-      margin: 12px 0;
-    }
-
-    .subtitle {
-      color: #66758a;
-      font-size: 14px;
-      line-height: 1.6;
-      margin-bottom: 20px;
-    }
-
-    .upload {
-      display: block;
-      width: 100%;
-      padding: 15px;
-      border: none;
-      border-radius: 15px;
-      background: var(--accent);
-      color: white;
-      font-size: 15px;
-      font-weight: 700;
-      text-align: center;
-      cursor: pointer;
-    }
-
-    .upload input {
-      display: none;
-    }
-
-    .preview {
-      display: none;
-      width: 100%;
-      max-height: 280px;
-      object-fit: contain;
-      margin-top: 15px;
-      border-radius: 15px;
-      background: white;
-    }
-
-    h2 {
-      font-size: 19px;
-      letter-spacing: -0.4px;
-      margin: 26px 0 14px;
-    }
-
-    .features {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 12px;
-    }
-
-    .feature {
-      padding: 17px 15px;
-      border-radius: 19px;
-      background: var(--card);
-      border: 1px solid var(--border);
-      cursor: pointer;
-      text-align: left;
-      color: var(--text);
-      font: inherit;
-      min-width: 0;
-    }
-
-    .feature:active {
-      transform: scale(0.98);
-    }
-
-    .feature-icon {
-      display: grid;
-      place-items: center;
-      width: 43px;
-      height: 43px;
-      border-radius: 14px;
-      background: #f0f4fa;
-      font-size: 23px;
-      margin-bottom: 17px;
-    }
-
-    .feature strong {
-      display: block;
-      font-size: 14px;
-      margin-bottom: 7px;
-    }
-
-    .feature small {
-      display: block;
-      color: var(--muted);
-      font-size: 12px;
-      line-height: 1.45;
-    }
-
-    .palette {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      padding: 17px;
-      background: white;
-      border: 1px solid var(--border);
-      border-radius: 19px;
-    }
-
-    .swatch {
-      width: 35px;
-      height: 35px;
-      border-radius: 50%;
-      border: 3px solid white;
-      box-shadow: 0 0 0 1px #dce2ea;
-      cursor: pointer;
-    }
-
-    .swatch.selected {
-      box-shadow: 0 0 0 2px var(--accent);
-    }
-
-    .hint {
-      margin-top: 13px;
-      color: var(--muted);
-      font-size: 12px;
-      line-height: 1.5;
-    }
-
-    .status {
-      display: none;
-      margin-top: 12px;
-      padding: 12px;
-      border-radius: 12px;
-      background: #e7f8ee;
-      color: #176b41;
-      font-size: 13px;
-    }
-
-    footer {
-      text-align: center;
-      color: #98a2b3;
-      font-size: 11px;
-      padding-top: 27px;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f6f7fb">
+<title>AutoStyle AI — каталог дисков</title>
+<style>
+:root{--bg:#f6f7fb;--card:#fff;--text:#172033;--muted:#687386;--line:#e5e8ef;--accent:#3b63f3;--accent2:#eaf0ff;--good:#16794b;--warn:#8a5a00;--shadow:0 10px 30px rgba(22,32,51,.06)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:15px/1.5 Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
+button,input,select{font:inherit}
+button{cursor:pointer}
+.page{max-width:1120px;margin:auto;padding:22px 18px 52px}
+header{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:24px}
+.brand{display:flex;align-items:center;gap:11px;font-weight:800;font-size:21px;letter-spacing:-.5px}
+.logo{width:42px;height:42px;border-radius:14px;background:#172033;color:white;display:grid;place-items:center;font-size:20px}
+.tag{font-size:12px;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:7px 11px;background:#fff}
+h1{font-size:clamp(27px,4vw,40px);line-height:1.12;letter-spacing:-1.2px;margin:0 0 10px}
+h2{font-size:21px;letter-spacing:-.4px;margin:0 0 7px}
+h3{font-size:16px;margin:0 0 5px}
+p{margin:0}
+.muted{color:var(--muted)}
+.hero{margin-bottom:24px}
+.hero p{max-width:700px;color:var(--muted);font-size:16px}
+.layout{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(290px,.9fr);gap:18px;align-items:start}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:20px;box-shadow:var(--shadow);margin-bottom:18px}
+.car-summary{display:flex;gap:15px;align-items:center}
+.car-icon{width:86px;height:76px;flex:0 0 86px;border-radius:15px;background:linear-gradient(145deg,#edf1f9,#dfe5f1);display:grid;place-items:center;font-size:36px}
+.pill{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:5px 9px;font-size:12px;font-weight:700;background:#f0f3f9;color:#465268}
+.pill.blue{background:var(--accent2);color:#2446be}
+.controls{display:flex;gap:10px;flex-wrap:wrap;margin-top:17px}
+select,.search{border:1px solid var(--line);border-radius:11px;background:#fff;color:var(--text);padding:11px 12px;min-width:150px;outline:none}
+select:focus,.search:focus{border-color:var(--accent)}
+.catalog-head{display:flex;justify-content:space-between;align-items:end;gap:14px;margin-bottom:15px}
+.catalog-head .muted{font-size:13px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
+.wheel-card{border:1px solid var(--line);border-radius:16px;padding:13px;background:#fff;transition:.18s;min-width:0}
+.wheel-card.selected{border:2px solid var(--accent);padding:12px;background:#fbfcff;box-shadow:0 0 0 3px rgba(59,99,243,.08)}
+.wheel-art{height:172px;border-radius:12px;background:radial-gradient(circle at 50% 42%,#f8f9fc,#e9edf5);display:grid;place-items:center;margin-bottom:12px;overflow:hidden}
+.wheel-art svg{width:150px;height:150px;filter:drop-shadow(0 8px 7px rgba(0,0,0,.18))}
+.card-title-row{display:flex;justify-content:space-between;gap:8px;align-items:start}
+.card-title-row h3{font-size:15px}
+.price-note{font-size:11px;color:var(--muted);margin-top:2px}
+.spec-mini{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0 12px}
+.spec-mini span{font-size:11px;color:#4d596d;background:#f2f4f8;padding:4px 7px;border-radius:7px}
+.btn{border:0;border-radius:11px;padding:11px 14px;font-weight:700;background:var(--accent);color:white}
+.btn:hover{filter:brightness(.96)}
+.btn.secondary{background:#f0f3f9;color:#26334a}
+.btn.outline{background:white;color:var(--text);border:1px solid var(--line)}
+.btn.block{width:100%}
+.btn:disabled{opacity:.55;cursor:not-allowed}
+.spec-list{display:grid;gap:0;margin:14px 0}
+.spec-row{display:flex;justify-content:space-between;gap:14px;padding:10px 0;border-bottom:1px solid var(--line);font-size:14px}
+.spec-row:last-child{border-bottom:0}
+.spec-row span:first-child{color:var(--muted)}
+.spec-row strong{text-align:right}
+.notice{border-radius:13px;padding:12px 13px;font-size:13px;line-height:1.45}
+.notice.warning{background:#fff7e5;color:#795000;border:1px solid #f4e0aa}
+.notice.info{background:#edf4ff;color:#274b94;border:1px solid #d8e5ff}
+.preview-box{border:1px dashed #cbd2df;border-radius:14px;padding:14px;text-align:center;background:#fafbfe}
+.preview-box img{display:block;width:100%;max-height:260px;object-fit:contain;border-radius:10px;margin:12px auto 0}
+input[type=file]{display:none}
+.file-label{display:inline-block;border:1px solid var(--line);background:white;border-radius:10px;padding:9px 12px;font-weight:650;cursor:pointer}
+#status{font-size:13px;color:var(--muted);margin-top:10px;min-height:20px}
+footer{font-size:12px;color:var(--muted);text-align:center;padding:10px}
+.empty{grid-column:1/-1;padding:24px;text-align:center;color:var(--muted)}
+@media(max-width:800px){.layout{grid-template-columns:1fr}.side{order:-1}.page{padding:16px 12px 38px}.panel{padding:16px}.tag{display:none}}
+@media(max-width:440px){.grid{grid-template-columns:1fr}.wheel-art{height:190px}.wheel-art svg{width:165px;height:165px}.catalog-head{align-items:start;flex-direction:column}.car-icon{width:65px;flex-basis:65px}}
+</style>
 </head>
-
 <body>
-  <main class="app">
-    <header class="topbar">
-      <div class="brand">
-        <div class="logo">🚘</div>
-        <span>AutoStyle AI</span>
+<div class="page">
+<header>
+  <div class="brand"><div class="logo">AS</div><span>AutoStyle AI</span></div>
+  <div class="tag">Каталог дисков · демо-версия</div>
+</header>
+
+<section class="hero">
+  <h1>Подбери диски<br>для своего Geely Atlas</h1>
+  <p>Выбирай дизайн, сравнивай внешний вид и проверяй базовые параметры. Каталог сейчас демонстрационный: изображения дисков — эскизы дизайна, а не карточки конкретных товаров.</p>
+</section>
+
+<div class="layout">
+  <main>
+    <section class="panel">
+      <div class="car-summary">
+        <div class="car-icon" aria-hidden="true">🚙</div>
+        <div>
+          <span class="pill blue">Автомобиль выбран</span>
+          <h2 style="margin-top:7px">Geely Atlas II (FX11)</h2>
+          <p class="muted">Второе поколение · 2023 и новее</p>
+        </div>
       </div>
-      <div class="tag">AI STUDIO</div>
-    </header>
-
-    <section class="hero">
-      <div class="eyebrow">Твой автомобиль. Твой стиль.</div>
-      <h1>Создай авто<br>своей мечты</h1>
-      <div class="subtitle">
-        Загрузи фото автомобиля и посмотри,
-        как он будет выглядеть после тюнинга.
+      <div class="controls">
+        <select id="finishFilter" aria-label="Фильтр по цвету">
+          <option value="all">Все цвета</option>
+          <option value="black">Чёрные</option>
+          <option value="silver">Серебристые</option>
+          <option value="two">Двухцветные</option>
+        </select>
+        <select id="styleFilter" aria-label="Фильтр по стилю">
+          <option value="all">Все стили</option>
+          <option value="sport">Спортивные</option>
+          <option value="classic">Классические</option>
+          <option value="mesh">Многоспицевые</option>
+        </select>
       </div>
-
-      <label class="upload">
-        📷 Загрузить фото автомобиля
-        <input id="photoInput" type="file" accept="image/*">
-      </label>
-
-      <img id="preview" class="preview" alt="Фото автомобиля">
-      <div id="status" class="status"></div>
     </section>
 
-    <h2>Что будем менять?</h2>
-
-    <section class="features">
-      <button class="feature" data-action="wheels">
-        <div class="feature-icon">🛞</div>
-        <strong>Колёсные диски</strong>
-        <small>Спортивные, классические и премиальные</small>
-      </button>
-
-      <button class="feature" data-action="color">
-        <div class="feature-icon">🎨</div>
-        <strong>Цвет кузова</strong>
-        <small>Выбери новый оттенок своего авто</small>
-      </button>
-
-      <button class="feature" data-action="wrap">
-        <div class="feature-icon">✨</div>
-        <strong>Виниловая плёнка</strong>
-        <small>Матовая, глянцевая, карбон и другие</small>
-      </button>
-
-      <button class="feature" data-action="ai">
-        <div class="feature-icon">🤖</div>
-        <strong>AI-тюнинг</strong>
-        <small>Опиши свою идею и создай новый образ</small>
-      </button>
+    <section class="panel">
+      <div class="catalog-head">
+        <div><h2>Каталог дизайнов</h2><p class="muted">Выбери карточку, чтобы посмотреть её параметры</p></div>
+        <span class="pill" id="count">6 вариантов</span>
+      </div>
+      <div class="grid" id="wheelGrid"></div>
     </section>
 
-    <h2>Популярные цвета</h2>
-
-    <section class="palette" id="palette">
-      <button class="swatch selected" data-color="Белый"
-        style="background:#f7f7f7" aria-label="Белый"></button>
-      <button class="swatch" data-color="Чёрный"
-        style="background:#17191d" aria-label="Чёрный"></button>
-      <button class="swatch" data-color="Красный"
-        style="background:#dc343b" aria-label="Красный"></button>
-      <button class="swatch" data-color="Синий"
-        style="background:#2863cc" aria-label="Синий"></button>
-      <button class="swatch" data-color="Зелёный"
-        style="background:#287b59" aria-label="Зелёный"></button>
-      <button class="swatch" data-color="Серый металлик"
-        style="background:#9299a5" aria-label="Серый"></button>
+    <section class="panel">
+      <h2>Цвет кузова и плёнка</h2>
+      <p class="muted" style="font-size:13px;margin-bottom:14px">Эти настройки пока сохраняют выбор в интерфейсе. Изображение автомобиля автоматически не перекрашивается.</p>
+      <h3>Цвет кузова</h3>
+      <div class="controls" id="paintChoices">
+        <button class="btn outline paint-choice" data-value="Белый перламутр" style="display:flex;align-items:center;gap:8px"><span style="display:inline-block;width:18px;height:18px;border-radius:50%;background:#f7f7f4;border:1px solid #ccd0d8"></span>Белый</button>
+        <button class="btn outline paint-choice" data-value="Чёрный металлик" style="display:flex;align-items:center;gap:8px"><span style="display:inline-block;width:18px;height:18px;border-radius:50%;background:#20232b"></span>Чёрный</button>
+        <button class="btn outline paint-choice" data-value="Графитовый серый" style="display:flex;align-items:center;gap:8px"><span style="display:inline-block;width:18px;height:18px;border-radius:50%;background:#68717d"></span>Графит</button>
+        <button class="btn outline paint-choice" data-value="Тёмно-синий металлик" style="display:flex;align-items:center;gap:8px"><span style="display:inline-block;width:18px;height:18px;border-radius:50%;background:#243d6a"></span>Синий</button>
+      </div>
+      <h3 style="margin-top:18px">Виниловая плёнка</h3>
+      <div class="controls" id="wrapChoices">
+        <button class="btn outline wrap-choice" data-value="Матовый чёрный">Матовый чёрный</button>
+        <button class="btn outline wrap-choice" data-value="Сатиновый серый">Сатиновый серый</button>
+        <button class="btn outline wrap-choice" data-value="Карбон">Карбон</button>
+        <button class="btn outline wrap-choice" data-value="Без плёнки">Без плёнки</button>
+      </div>
+      <div id="paintStatus" class="muted" style="font-size:13px;margin-top:12px">Цвет и плёнка не выбраны.</div>
     </section>
-
-    <div class="hint">
-      Сейчас мы создаём интерфейс. Редактирование фото с помощью ИИ
-      подключим на следующем этапе.
-    </div>
-
-    <footer>AutoStyle AI · Виртуальный тюнинг автомобиля</footer>
   </main>
 
-  <script>
-    const tg = window.Telegram?.WebApp;
-    tg?.ready();
-    tg?.expand();
+  <aside class="side">
+    <section class="panel">
+      <h2>Параметры совместимости</h2>
+      <p class="muted" style="font-size:13px">Справочные данные для Geely Atlas II (FX11). Точная комплектация и рынок важны.</p>
+      <div class="spec-list">
+        <div class="spec-row"><span>Диаметр / размер</span><strong>19″ · 8J</strong></div>
+        <div class="spec-row"><span>Вылет (ET)</span><strong>ET48</strong></div>
+        <div class="spec-row"><span>Разболтовка (PCD)</span><strong>5×108</strong></div>
+        <div class="spec-row"><span>Центральное отверстие</span><strong>63,4 мм</strong></div>
+        <div class="spec-row"><span>Резьба крепежа</span><strong>M14×1,5</strong></div>
+        <div class="spec-row"><span>Типоразмер шины</span><strong>235/50 R19</strong></div>
+      </div>
+      <div class="notice warning">Перед покупкой обязательно проверь размер по VIN, табличке автомобиля или руководству для своей комплектации. Эти параметры — справочный ориентир, а не гарантия совместимости.</div>
+      <div style="margin-top:12px" class="notice info">PCD, центральное отверстие, вылет, ширина диска и допустимая нагрузка должны соответствовать автомобилю. Не выбирай диск только по диаметру.</div>
+    </section>
 
-    const photoInput = document.getElementById("photoInput");
-    const preview = document.getElementById("preview");
-    const status = document.getElementById("status");
+    <section class="panel">
+      <h2>Примерить на фото</h2>
+      <p class="muted" style="font-size:13px;margin-bottom:13px">Загрузи фото своего автомобиля. На этом этапе выбор сохраняется в интерфейсе, но диски автоматически на фото ещё не накладываются.</p>
+      <div class="preview-box">
+        <label class="file-label" for="carPhoto">📷 Загрузить фото</label>
+        <input id="carPhoto" type="file" accept="image/*">
+        <img id="photoPreview" alt="Предпросмотр автомобиля" hidden>
+        <p id="photoMessage" class="muted" style="font-size:12px;margin-top:9px">Фото остаётся в этом браузере.</p>
+      </div>
+      <div id="status" role="status" aria-live="polite">Выбери понравившийся дизайн в каталоге.</div>
+      <button class="btn block" id="chooseButton" style="margin-top:10px">Выбрать этот дизайн</button>
+    </section>
+  </aside>
+</div>
+<footer>AutoStyle AI · Демонстрационный каталог. Не является подтверждением технической совместимости или предложением о продаже.</footer>
+</div>
 
-    let selectedColor = "Белый";
-    let photoUrl = null;
+<script>
+const wheels = [
+  {id:1,name:"Turbine Sport",finish:"black",style:"sport",desc:"Турбинный спортивный дизайн",spokes:10,shape:"turbine"},
+  {id:2,name:"Split V",finish:"two",style:"sport",desc:"Раздвоенные V-образные спицы",spokes:10,shape:"split"},
+  {id:3,name:"Classic Silver",finish:"silver",style:"classic",desc:"Сдержанный серебристый дизайн",spokes:10,shape:"classic"},
+  {id:4,name:"Mesh Performance",finish:"black",style:"mesh",desc:"Частая сетка для динамичного образа",spokes:20,shape:"mesh"},
+  {id:5,name:"Diamond Cut",finish:"two",style:"mesh",desc:"Контрастные грани и тёмная основа",spokes:10,shape:"diamond"},
+  {id:6,name:"Multi-Spoke Elegance",finish:"silver",style:"mesh",desc:"Много тонких спиц",spokes:20,shape:"multi"}
+];
+let selectedId = 1;
 
-    photoInput.addEventListener("change", () => {
-      const file = photoInput.files[0];
-      if (!file) return;
+function wheelSVG(wheel){
+  const base = wheel.finish === "silver" ? "#b9c1ce" : wheel.finish === "two" ? "#222a38" : "#202633";
+  const face = wheel.finish === "silver" ? "#edf0f5" : wheel.finish === "two" ? "#cbd2dc" : "#4b5566";
+  const accent = wheel.finish === "two" ? "#f1f3f6" : wheel.finish === "silver" ? "#fff" : "#8993a3";
+  let spokes = "";
+  const n = wheel.spokes;
+  for(let i=0;i<n;i++){
+    const angle=(360/n)*i;
+    if(wheel.shape==="split" || wheel.shape==="diamond"){
+      spokes += `<path d="M -3 -17 L -8 -48 L -2 -67 L 3 -66 L 2 -45 L 4 -20 Z" transform="rotate(${angle})" fill="${i%2===0?accent:face}" stroke="#171c26" stroke-width="1.5"/>`;
+      if(wheel.shape==="split") spokes += `<path d="M 4 -20 L 10 -45 L 7 -60 L 12 -58 L 16 -42 L 7 -16 Z" transform="rotate(${angle+8})" fill="${face}" stroke="#171c26" stroke-width="1.2"/>`;
+    }else if(wheel.shape==="turbine"){
+      spokes += `<path d="M -5 -17 L -11 -42 Q -13 -51 -7 -67 L 1 -64 L -1 -43 L 5 -20 Z" transform="rotate(${angle})" fill="${i%2===0?accent:face}" stroke="#171c26" stroke-width="1.5"/>`;
+    }else{
+      spokes += `<path d="M -4 -18 L -6 -65 L 1 -67 L 5 -18 Z" transform="rotate(${angle})" fill="${i%2===0?accent:face}" stroke="#171c26" stroke-width="1.2"/>`;
+    }
+  }
+  return `<svg viewBox="0 0 180 180" role="img" aria-label="Эскиз диска ${wheel.name}">
+    <defs><radialGradient id="rim${wheel.id}" cx="35%" cy="25%"><stop offset="0" stop-color="${accent}"/><stop offset=".55" stop-color="${face}"/><stop offset="1" stop-color="${base}"/></radialGradient></defs>
+    <circle cx="90" cy="90" r="79" fill="#171c26"/>
+    <circle cx="90" cy="90" r="73" fill="url(#rim${wheel.id})" stroke="#aab2c0" stroke-width="2"/>
+    <g transform="translate(90 90)">${spokes}</g>
+    <circle cx="90" cy="90" r="27" fill="${base}" stroke="${accent}" stroke-width="4"/>
+    <circle cx="90" cy="90" r="16" fill="${face}" stroke="#141923" stroke-width="2"/>
+    ${[0,72,144,216,288].map(a=>`<circle cx="${90+Math.cos(a*Math.PI/180)*21}" cy="${90+Math.sin(a*Math.PI/180)*21}" r="3.3" fill="#161b25" stroke="${accent}" stroke-width="1"/>`).join("")}
+    <circle cx="90" cy="90" r="5" fill="${base}"/>
+  </svg>`;
+}
 
-      if (photoUrl) URL.revokeObjectURL(photoUrl);
-      photoUrl = URL.createObjectURL(file);
+function render(){
+  const finish=document.getElementById("finishFilter").value;
+  const style=document.getElementById("styleFilter").value;
+  const filtered=wheels.filter(w=>(finish==="all"||w.finish===finish)&&(style==="all"||w.style===style));
+  document.getElementById("count").textContent=`${filtered.length} ${filtered.length===1?"вариант":filtered.length<5?"варианта":"вариантов"}`;
+  const grid=document.getElementById("wheelGrid");
+  if(!filtered.length){grid.innerHTML='<div class="empty">По этим фильтрам вариантов нет. Попробуй изменить фильтры.</div>';return}
+  grid.innerHTML=filtered.map(w=>`
+    <article class="wheel-card ${w.id===selectedId?"selected":""}" data-id="${w.id}">
+      <div class="wheel-art">${wheelSVG(w)}</div>
+      <div class="card-title-row"><div><h3>${w.name}</h3><p class="price-note">${w.desc}</p></div>${w.id===selectedId?'<span class="pill blue">Выбран</span>':''}</div>
+      <div class="spec-mini"><span>R19 · 8J</span><span>ET48</span><span>${w.finish==="black"?"Чёрный":w.finish==="silver"?"Серебристый":"Двухцветный"}</span></div>
+      <button class="btn ${w.id===selectedId?"":"secondary"} block" onclick="selectWheel(${w.id})">${w.id===selectedId?"Выбрано":"Выбрать дизайн"}</button>
+    </article>`).join("");
+}
+function selectWheel(id){
+  selectedId=id;
+  const w=wheels.find(item=>item.id===id);
+  document.getElementById("status").textContent=`Выбран дизайн «${w.name}». Параметры карточки: R19 · 8J · ET48 · PCD 5×108.`;
+  render();
+}
+document.getElementById("finishFilter").addEventListener("change",render);
+document.getElementById("styleFilter").addEventListener("change",render);
+document.getElementById("chooseButton").addEventListener("click",()=>{
+  const w=wheels.find(item=>item.id===selectedId);
+  document.getElementById("status").textContent=`Сохранён выбор: «${w.name}». Автоматическое наложение на фото будет добавлено отдельным этапом.`;
+});
+document.getElementById("carPhoto").addEventListener("change",event=>{
+  const file=event.target.files && event.target.files[0];
+  if(!file)return;
+  if(!file.type.startsWith("image/")){document.getElementById("photoMessage").textContent="Пожалуйста, выбери файл изображения.";return;}
+  const reader=new FileReader();
+  reader.onload=()=>{
+    const img=document.getElementById("photoPreview");
+    img.src=reader.result;img.hidden=false;
+    document.getElementById("photoMessage").textContent=`Загружено: ${file.name}. Изображение не отправляется на сервер.`;
+  };
+  reader.readAsDataURL(file);
+});
 
-      preview.src = photoUrl;
-      preview.style.display = "block";
+let chosenPaint = "";
+let chosenWrap = "";
+document.querySelectorAll(".paint-choice").forEach(button=>{
+  button.addEventListener("click",()=>{
+    chosenPaint=button.dataset.value;
+    document.querySelectorAll(".paint-choice").forEach(b=>b.classList.remove("selected"));
+    button.classList.add("selected");
+    updatePaintStatus();
+  });
+});
+document.querySelectorAll(".wrap-choice").forEach(button=>{
+  button.addEventListener("click",()=>{
+    chosenWrap=button.dataset.value;
+    document.querySelectorAll(".wrap-choice").forEach(b=>b.classList.remove("selected"));
+    button.classList.add("selected");
+    updatePaintStatus();
+  });
+});
+function updatePaintStatus(){
+  document.getElementById("paintStatus").textContent =
+    `Выбрано: кузов — ${chosenPaint || "без изменений"}; плёнка — ${chosenWrap || "не выбрана"}.`;
+}
 
-      status.textContent =
-        "Фото выбрано! На следующем этапе подключим обработку ИИ.";
-      status.style.display = "block";
-    });
-
-    document.querySelectorAll(".swatch").forEach(button => {
-      button.addEventListener("click", () => {
-        document.querySelectorAll(".swatch").forEach(item => {
-          item.classList.remove("selected");
-        });
-
-        button.classList.add("selected");
-        selectedColor = button.dataset.color;
-
-        status.textContent = "Выбран цвет: " + selectedColor;
-        status.style.display = "block";
-      });
-    });
-
-    document.querySelectorAll(".feature").forEach(button => {
-      button.addEventListener("click", () => {
-        const action = button.dataset.action;
-
-        if (!photoInput.files.length) {
-          status.textContent =
-            "Сначала загрузи фотографию автомобиля.";
-          status.style.display = "block";
-          return;
-        }
-
-        const labels = {
-          wheels: "Выбрана замена дисков.",
-          color: "Выбран новый цвет: " + selectedColor + ".",
-          wrap: "Выбрана виниловая плёнка.",
-          ai: "Выбран AI-тюнинг."
-        };
-
-        status.textContent =
-          labels[action] + " Подключение ИИ будет следующим этапом.";
-        status.style.display = "block";
-      });
-    });
-  </script>
+render();
+</script>
 </body>
 </html>
